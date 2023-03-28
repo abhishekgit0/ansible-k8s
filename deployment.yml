@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb
+  labels:
+    app: myweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+             claimName: myclaim
+      containers:
+      - name: myweb
+        image: skabhi003/centos-web
+        volumeMounts:
+          - name: data
+            mountPath: /var/www/html
+        ports:
+        - containerPort: 80
