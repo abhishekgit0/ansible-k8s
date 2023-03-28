@@ -1,0 +1,19 @@
+- hosts: localhost
+  tasks:
+     - name: Create pvc
+       k8s:
+         state: present
+         namespace: default
+         src: pvc.yml
+         
+     - name: Create deployment
+       k8s:
+         state: present
+         namespace: default
+         src: deployment.yml
+         
+     - name: Create service
+       k8s:
+         state: present
+         namespace: default
+         src: service.yml
